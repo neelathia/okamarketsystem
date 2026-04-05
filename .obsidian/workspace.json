@@ -8,77 +8,35 @@
         "type": "tabs",
         "children": [
           {
-            "id": "48d74ab90f241ff4",
+            "id": "09d66274ae0420e0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_Structured (Job Patterns)/JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH.md",
+                "file": "03_Insights/🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH"
+              "title": "🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content"
             }
           },
           {
-            "id": "c7b0d992ece9185c",
+            "id": "a5acb3f5470fb78e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_Structured (Job Patterns)/JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH.md",
+                "file": "01_Raw/00—Reusable Prompt.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH"
+              "title": "00—Reusable Prompt"
             }
           },
           {
-            "id": "9ac4f2c571ed7525",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_Structured (Job Patterns)/JP—Content Engineer Clarity Consultants—High.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "JP—Content Engineer Clarity Consultants—High"
-            }
-          },
-          {
-            "id": "e9e6bb2e2ce83110",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_Insights/🧠 INSIGHT 4—TTX Experience.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "🧠 INSIGHT 4—TTX Experience"
-            }
-          },
-          {
-            "id": "77c681e02d46f3c2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_Insights/🧠 INSIGHT 3—AI Is Forcing a Split in Knowledge Design.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "🧠 INSIGHT 3—AI Is Forcing a Split in Knowledge Design"
-            }
-          },
-          {
-            "id": "d9ce6818966c707e",
+            "id": "7bd0428c104b6347",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -90,9 +48,23 @@
               "icon": "lucide-file",
               "title": "🧠 INSIGHT 1—The Core Market Gap"
             }
+          },
+          {
+            "id": "0d78e2bedbec2e90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_Insights/Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -272,17 +244,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d9ce6818966c707e",
+  "active": "0d78e2bedbec2e90",
   "lastOpenFiles": [
-    "02_Structured (Job Patterns)/STRUCTURED_Template.md",
+    "03_Insights/🧠 INSIGHT 1—The Core Market Gap.md",
+    "03_Insights/Untitled.md",
+    "01_Raw/JP–Knowledge Architect–System–High.md",
+    "01_Raw/00—Reusable Prompt.md",
+    "01_Raw/00—System Reference.md",
+    "01_Raw/RAW_Template.md",
+    "01_Raw/00—Index.md",
+    "02_Structured (Job Patterns)/JP—Technical Writer (Tech Journalism Insight Synthesis)—System – Medium.md",
+    "02_Structured (Job Patterns)/JP – Knowledge Architect – Architecture – Very High.md",
+    "03_Insights/🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content.md",
     "03_Insights/🧠 INSIGHT 6—The Hidden Architecture Layer Nobody Is Hiring For—Until Now.md",
+    "02_Structured (Job Patterns)/JP—Technical Writer IV—Execution—Medium.md",
+    "02_Structured (Job Patterns)/STRUCTURED_Template.md",
     "03_Insights/🧠 INSIGHT 5—Enterprise knowledge is being architected for AI, but hired for as content.md",
     "03_Insights/🧠 INSIGHT 3—AI Is Forcing a Split in Knowledge Design.md",
     "03_Insights/🧠 INSIGHT 4—TTX Experience.md",
     "03_Insights/🧠 INSIGHT 2—Documentation Is Becoming Execution.md",
-    "03_Insights/🧠 INSIGHT 1—The Core Market Gap.md",
-    "02_Structured (Job Patterns)/JP —Technical Writer (Tech Journalism Insight Synthesis)—System – Medium.md",
-    "02_Structured (Job Patterns)/JP—Technical Writer IV—Execution—Medium.md",
     "02_Structured (Job Patterns)/JP—Content Engineer Clarity Consultants—High.md",
     "02_Structured (Job Patterns)/JP—Senior Process Architect—AI Workflows—Very High.md",
     "02_Structured (Job Patterns)/JP—Senior Knowledge Manager—Strategy—Governance—High.md",
@@ -292,18 +272,10 @@
     "02_Structured (Job Patterns)/JP—Principal Software Engineer (Knowledge Platform)—Architecture—Very High.md",
     "02_Structured (Job Patterns)/JP—Knowledge Manager—Governance  Content Layer—MEDIUM.md",
     "02_Structured (Job Patterns)/JP—AI Knowledge Data Engineer—Architecture—ery High.md",
-    "02_Structured (Job Patterns)/JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH.md",
-    "02_Structured (Job Patterns)/JP—Director Content Strategy —Architecture—High.md.md",
-    "01_Raw/00_System_Reference.md",
     "okamarketsystem",
-    "01_Raw/00 Index.md",
-    "04_Proof/The Instruction Layer -  What I learned when nobody could agree on what knowledge was for.md",
     "04_Proof",
-    "01_Raw/RAW_Template.md",
-    "2D. Concepts - Intent Model.md",
     "02_Structured (Job Patterns)",
     "03_Insights",
-    "01_Raw",
-    "📚 DOCUMENTATION SITE MAP.md"
+    "01_Raw"
   ]
 }
