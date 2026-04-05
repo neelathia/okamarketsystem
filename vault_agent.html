@@ -773,11 +773,14 @@ async function loadVault() {
     await new Promise(r => setTimeout(r, 400));
     document.getElementById('loadingOverlay').style.display = 'none';
 
-    const loaded = vaultFiles.filter(f => f.loaded).length;
-    setStatus(`${loaded} files loaded`, 'loaded');
+    const loaded = vaultFiles.filter(f => f.loaded && f.content).length;
+    const errors = vaultFiles.filter(f => f.error).length;
+    const statusType = loaded > 0 ? 'loaded' : 'error';
+    const statusText = errors > 0 ? `${loaded} loaded · ${errors} failed` : `${loaded} files loaded`;
+    setStatus(statusText, statusType);
     document.getElementById('headerMeta').textContent = `${loaded} files · ${GITHUB_REPO}`;
-    document.getElementById('contextMeta').textContent = `${loaded} files loaded`;
-    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('contextMeta').textContent = `${loaded} files in context`;
+    if (loaded > 0) document.getElementById('sendBtn').disabled = false;
 
   } catch(e) {
     showError(`Failed to load vault: ${e.message}`);
@@ -811,17 +814,20 @@ async function discoverMdFiles(path) {
 }
 
 async function fetchFileContent(path) {
-  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`;
-  const headers = { 'Accept': 'application/vnd.github.v3+json' };
-  if (GITHUB_TOKEN) headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+  // Use raw.githubusercontent.com — no base64 decode needed, no API rate limit hit
+  const branch = 'main';
+  const rawUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/${branch}/${path}`;
 
-  const res = await fetch(url, { headers });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
+  let res = await fetch(rawUrl);
 
-  // Decode base64
-  const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-  return decoded;
+  // If main branch fails, try master
+  if (!res.ok) {
+    const masterUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/master/${path}`;
+    res = await fetch(masterUrl);
+  }
+
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
+  return await res.text();
 }
 
 // ── FILE LIST UI ───────────────────────────────────────
