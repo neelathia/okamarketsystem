@@ -23,3 +23,5 @@ Do the following:
 
 Here is the job posting:
 Attached or pasted JD
+
+Save the Chat History with the Same as the JD title

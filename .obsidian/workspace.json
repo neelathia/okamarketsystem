@@ -8,63 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "09d66274ae0420e0",
+            "id": "ad3b3dd4f1b0ce61",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_Insights/🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content.md",
+                "file": "02_Structured (Job Patterns)/JP—Director Content Strategy —Architecture—High.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content"
-            }
-          },
-          {
-            "id": "a5acb3f5470fb78e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_Raw/00—Reusable Prompt.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "00—Reusable Prompt"
-            }
-          },
-          {
-            "id": "7bd0428c104b6347",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_Insights/🧠 INSIGHT 1—The Core Market Gap.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "🧠 INSIGHT 1—The Core Market Gap"
-            }
-          },
-          {
-            "id": "0d78e2bedbec2e90",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "03_Insights/Untitled.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
+              "title": "JP—Director Content Strategy —Architecture—High.md"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -244,17 +201,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0d78e2bedbec2e90",
+  "active": "ad3b3dd4f1b0ce61",
   "lastOpenFiles": [
+    "02_Structured (Job Patterns)/🔖🎯JP—Developer Relations & Documentation—System—High.md",
+    "02_Structured (Job Patterns)/🔖🎯JP—Content Engineer—AI Content Systems—Very High.md",
+    "02_Structured (Job Patterns)/🔖🎯JP—Content Engineer Clarity Consultants—High.md",
+    "02_Structured (Job Patterns)/🔖🎯JP—AI Knowledge Data Engineer—Architecture—Very High.md",
+    "02_Structured (Job Patterns)/🔖🎯JP–AI Content Optimization Engineer—Content_Retrieval Layer —HIGH.md",
+    "02_Structured (Job Patterns)/🔖 JD 2 — Principal Technical Writer (Crunchafi).md",
+    "02_Structured (Job Patterns)/🔖🎯 JP – Knowledge Architect – Architecture – Very High.md",
     "03_Insights/🧠 INSIGHT 1—The Core Market Gap.md",
-    "03_Insights/Untitled.md",
-    "01_Raw/JP–Knowledge Architect–System–High.md",
+    "03_Insights/🧠 INSIGHT 8 — AI Adoption Has a Knowledge Debt Problem.md",
+    "01_Raw/JP – AI & Automation Knowledge Implementation Manager – System – Very High.md",
     "01_Raw/00—Reusable Prompt.md",
+    "03_Insights/🧠 INSIGHT 7—The Multiplier Is the Strategy, Not the Tool.md",
+    "01_Raw/JP–Knowledge Architect–System–High.md",
     "01_Raw/00—System Reference.md",
     "01_Raw/RAW_Template.md",
     "01_Raw/00—Index.md",
     "02_Structured (Job Patterns)/JP—Technical Writer (Tech Journalism Insight Synthesis)—System – Medium.md",
-    "02_Structured (Job Patterns)/JP – Knowledge Architect – Architecture – Very High.md",
     "03_Insights/🧠 INSIGHT 6—Knowledge as AI Infrastructure—The Foundation Problem Is Structural, Not Content.md",
     "03_Insights/🧠 INSIGHT 6—The Hidden Architecture Layer Nobody Is Hiring For—Until Now.md",
     "02_Structured (Job Patterns)/JP—Technical Writer IV—Execution—Medium.md",
@@ -263,15 +228,7 @@
     "03_Insights/🧠 INSIGHT 3—AI Is Forcing a Split in Knowledge Design.md",
     "03_Insights/🧠 INSIGHT 4—TTX Experience.md",
     "03_Insights/🧠 INSIGHT 2—Documentation Is Becoming Execution.md",
-    "02_Structured (Job Patterns)/JP—Content Engineer Clarity Consultants—High.md",
     "02_Structured (Job Patterns)/JP—Senior Process Architect—AI Workflows—Very High.md",
-    "02_Structured (Job Patterns)/JP—Senior Knowledge Manager—Strategy—Governance—High.md",
-    "02_Structured (Job Patterns)/JP—Knowledge Manager—IT Services—Medium.md",
-    "02_Structured (Job Patterns)/JP—Developer Relations & Documentation—System—High.md",
-    "02_Structured (Job Patterns)/JP—Content Engineer—AI Content Systems—Very High.md",
-    "02_Structured (Job Patterns)/JP—Principal Software Engineer (Knowledge Platform)—Architecture—Very High.md",
-    "02_Structured (Job Patterns)/JP—Knowledge Manager—Governance  Content Layer—MEDIUM.md",
-    "02_Structured (Job Patterns)/JP—AI Knowledge Data Engineer—Architecture—ery High.md",
     "okamarketsystem",
     "04_Proof",
     "02_Structured (Job Patterns)",
