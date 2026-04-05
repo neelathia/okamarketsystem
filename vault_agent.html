@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OKA Market Intelligence — Vault Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --cream-dark: #ede7d9;
+    --ink: #1a1610;
+    --ink-mid: #3d3628;
+    --ink-light: #6b5f4e;
+    --accent: #8b2635;
+    --accent-light: #c94a5a;
+    --gold: #c8a84b;
+    --green: #2d6a4f;
+    --border: rgba(26,22,16,0.12);
+    --border-strong: rgba(26,22,16,0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── SETUP SCREEN ── */
+  #setup {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .setup-card {
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .setup-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+  }
+
+  .setup-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .setup-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .setup-sub {
+    font-size: 14px;
+    color: var(--ink-light);
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .field-group {
+    margin-bottom: 20px;
+  }
+
+  .field-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .field-input {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .field-input:focus {
+    border-color: var(--accent);
+  }
+
+  .field-hint {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 5px;
+  }
+
+  .btn-start {
+    width: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    border-radius: 2px;
+    padding: 14px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .btn-start:hover { background: var(--accent); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ── MAIN APP ── */
+  #app {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .app-header {
+    border-bottom: 1px solid var(--border-strong);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .header-title em { font-style: italic; color: var(--accent); }
+
+  .header-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .status-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-light);
+  }
+
+  .status-pill.loaded {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .status-pill.loading {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .status-pill.error {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Body layout */
+  .app-body {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 57px);
+  }
+
+  /* Left panel — file index */
+  .left-panel {
+    width: 260px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    overflow-y: auto;
+    max-height: calc(100vh - 57px);
+    position: sticky;
+    top: 57px;
+  }
+
+  .panel-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    padding: 0 20px;
+    margin-bottom: 12px;
+  }
+
+  .file-list { list-style: none; }
+
+  .file-item {
+    padding: 7px 20px;
+    font-size: 12px;
+    color: var(--ink-mid);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .file-item:hover {
+    background: var(--cream-dark);
+    color: var(--ink);
+  }
+
+  .file-item.loaded {
+    border-left-color: var(--green);
+  }
+
+  .file-item.loading {
+    border-left-color: var(--gold);
+    color: var(--ink-light);
+  }
+
+  .file-item.error {
+    border-left-color: var(--accent);
+    color: var(--ink-light);
+  }
+
+  .file-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    flex-shrink: 0;
+  }
+
+  .file-item.loaded .file-dot { background: var(--green); }
+  .file-item.loading .file-dot { background: var(--gold); }
+  .file-item.error .file-dot { background: var(--accent); }
+
+  .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+  }
+
+  /* Right panel — chat */
+  .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 57px);
+  }
+
+  /* Chat area */
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    max-width: 560px;
+    margin: 60px auto 0;
+    text-align: center;
+  }
+
+  .empty-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .empty-headline em { font-style: italic; color: var(--accent); }
+
+  .empty-sub {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .suggestion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .suggestion-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .suggestion-card:hover {
+    border-color: var(--accent);
+    background: white;
+  }
+
+  .suggestion-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  .suggestion-card-text {
+    font-size: 12px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  /* Messages */
+  .message {
+    max-width: 720px;
+    margin: 0 auto 32px;
+  }
+
+  .message-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+  }
+
+  .message.user .message-role { color: var(--accent); }
+
+  .message-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .message.user .message-body {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--ink-mid);
+    font-style: italic;
+  }
+
+  .message-body p { margin-bottom: 12px; }
+  .message-body p:last-child { margin-bottom: 0; }
+
+  .message-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .message-body em {
+    font-style: italic;
+    color: var(--ink-mid);
+  }
+
+  .message-body ul, .message-body ol {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  .message-body li { margin-bottom: 4px; }
+
+  .message-body code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: var(--cream-dark);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  .message-divider {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Thinking indicator */
+  .thinking {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  .thinking-dots span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink-light);
+    margin-right: 3px;
+    animation: blink 1.2s infinite;
+  }
+
+  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes blink {
+    0%, 80%, 100% { opacity: 0.2; }
+    40% { opacity: 1; }
+  }
+
+  /* Sources used */
+  .sources-used {
+    max-width: 720px;
+    margin: -20px auto 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .source-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--ink-light);
+  }
+
+  /* Input bar */
+  .input-bar {
+    border-top: 1px solid var(--border-strong);
+    padding: 20px 40px;
+    background: var(--cream);
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .input-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  .input-field {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    resize: none;
+    min-height: 48px;
+    max-height: 160px;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+  }
+
+  .input-field:focus { border-color: var(--accent); }
+
+  .input-field::placeholder { color: var(--ink-light); }
+
+  .btn-send {
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    border-radius: 2px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-send:hover:not(:disabled) { background: var(--accent); }
+  .btn-send:disabled { opacity: 0.4; cursor: default; }
+
+  .input-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+
+  /* Loading overlay */
+  #loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+  }
+
+  .loading-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .loading-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+
+  .loading-progress {
+    width: 300px;
+    height: 1px;
+    background: var(--border-strong);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loading-bar {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .loading-file {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-light);
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+    max-width: 300px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- SETUP SCREEN -->
+<div id="setup">
+  <div class="setup-card">
+    <div class="setup-eyebrow">OKA Market Intelligence System</div>
+    <h1 class="setup-title">Query your <em>vault</em></h1>
+    <p class="setup-sub">Enter your credentials to load all markdown files from your GitHub repository into context. Query across positioning pieces, job analyses, and strategic notes in one place.</p>
+
+    <div class="field-group">
+      <label class="field-label">Anthropic API Key</label>
+      <input type="password" class="field-input" id="apiKey" placeholder="sk-ant-api03-..."/>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">GitHub Repo</label>
+      <input type="text" class="field-input" id="repoInput" placeholder="neelathia/okamarketsystem" value="neelathia/okamarketsystem"/>
+      <div class="field-hint">owner/repository — must be public or provide a token below</div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">GitHub Token (optional — for private repos)</label>
+      <input type="password" class="field-input" id="githubToken" placeholder="github_pat_... (leave blank if public)"/>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Subfolder path (optional)</label>
+      <input type="text" class="field-input" id="folderPath" placeholder="e.g. notes or vault (leave blank for root)"/>
+    </div>
+
+    <button class="btn-start" onclick="startApp()">Load vault & begin →</button>
+    <hr class="divider"/>
+    <p style="font-size:11px;color:var(--ink-light);">🔒 Keys stored in session memory only. Never logged or transmitted except directly to Anthropic and GitHub APIs.</p>
+  </div>
+</div>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay">
+  <div class="loading-title">Loading vault</div>
+  <div class="loading-sub" id="loadingCount">Discovering files...</div>
+  <div class="loading-progress"><div class="loading-bar" id="loadingBar" style="width:0%"></div></div>
+  <div class="loading-file" id="loadingFile">—</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <header class="app-header">
+    <div class="header-brand">
+      <span class="header-title">OKA Market <em>Intelligence</em></span>
+      <span class="header-meta" id="headerMeta">—</span>
+    </div>
+    <div class="status-bar">
+      <span class="status-pill" id="statusPill">initializing</span>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Left: file index -->
+    <aside class="left-panel">
+      <div class="panel-label">Vault files</div>
+      <ul class="file-list" id="fileList"></ul>
+    </aside>
+
+    <!-- Right: chat -->
+    <div class="right-panel">
+      <div class="chat-area" id="chatArea">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-headline">What do you want to <em>know</em>?</div>
+          <p class="empty-sub">All your vault files are loaded into context. Ask anything — positioning, role fit, content gaps, strategic patterns across your notes.</p>
+          <div class="suggestion-grid">
+            <div class="suggestion-card" onclick="sendSuggestion(this)">
+              <div class="suggestion-card-label">Positioning</div>
+              <div class="suggestion-card-text">What is my core positioning argument across all these pieces?</div>
+            </div>
+            <div class="suggestion-card" onclick="sendSuggestion(this)">
+              <div class="suggestion-card-label">Role fit</div>
+              <div class="suggestion-card-text">Which role type best matches my OKA framework based on the job analyses?</div>
+            </div>
+            <div class="suggestion-card" onclick="sendSuggestion(this)">
+              <div class="suggestion-card-label">Content gaps</div>
+              <div class="suggestion-card-text">What themes appear frequently but haven't been developed into full pieces?</div>
+            </div>
+            <div class="suggestion-card" onclick="sendSuggestion(this)">
+              <div class="suggestion-card-label">Market signal</div>
+              <div class="suggestion-card-text">What market gap am I positioning into and how clearly is it articulated?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <div class="input-wrap">
+          <textarea class="input-field" id="queryInput" placeholder="Ask anything across your vault..." rows="1"
+            onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <div class="input-meta" id="contextMeta">— files loaded</div>
+        </div>
+        <button class="btn-send" id="sendBtn" onclick="sendQuery()" disabled title="Send">→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let API_KEY = '';
+let GITHUB_TOKEN = '';
+let GITHUB_REPO = '';
+let FOLDER_PATH = '';
+
+let vaultFiles = []; // { name, path, content, loaded }
+let conversationHistory = [];
+let isQuerying = false;
+
+// ── SETUP ──────────────────────────────────────────────
+
+function startApp() {
+  const key = document.getElementById('apiKey').value.trim();
+  const repo = document.getElementById('repoInput').value.trim();
+  const token = document.getElementById('githubToken').value.trim();
+  const folder = document.getElementById('folderPath').value.trim();
+
+  if (!key || !key.startsWith('sk-')) { alert('Please enter a valid Anthropic API key.'); return; }
+  if (!repo || !repo.includes('/')) { alert('Please enter a valid repo in owner/repo format.'); return; }
+
+  API_KEY = key;
+  GITHUB_REPO = repo;
+  GITHUB_TOKEN = token;
+  FOLDER_PATH = folder;
+
+  document.getElementById('setup').style.display = 'none';
+  document.getElementById('loadingOverlay').style.display = 'flex';
+  document.getElementById('app').style.display = 'flex';
+
+  loadVault();
+}
+
+// ── VAULT LOADING ──────────────────────────────────────
+
+async function loadVault() {
+  try {
+    const files = await discoverMdFiles(FOLDER_PATH || '');
+    if (files.length === 0) {
+      showError('No markdown files found in repository.');
+      return;
+    }
+
+    vaultFiles = files.map(f => ({ name: f.name, path: f.path, content: '', loaded: false, error: false }));
+    renderFileList();
+
+    document.getElementById('loadingCount').textContent = `Loading ${files.length} files...`;
+
+    // Load all files
+    for (let i = 0; i < vaultFiles.length; i++) {
+      const f = vaultFiles[i];
+      document.getElementById('loadingFile').textContent = f.name;
+      document.getElementById('loadingBar').style.width = `${((i / vaultFiles.length) * 100).toFixed(0)}%`;
+      updateFileStatus(i, 'loading');
+
+      try {
+        f.content = await fetchFileContent(f.path);
+        f.loaded = true;
+        updateFileStatus(i, 'loaded');
+      } catch(e) {
+        f.error = true;
+        updateFileStatus(i, 'error');
+      }
+    }
+
+    // Done
+    document.getElementById('loadingBar').style.width = '100%';
+    await new Promise(r => setTimeout(r, 400));
+    document.getElementById('loadingOverlay').style.display = 'none';
+
+    const loaded = vaultFiles.filter(f => f.loaded).length;
+    setStatus(`${loaded} files loaded`, 'loaded');
+    document.getElementById('headerMeta').textContent = `${loaded} files · ${GITHUB_REPO}`;
+    document.getElementById('contextMeta').textContent = `${loaded} files loaded`;
+    document.getElementById('sendBtn').disabled = false;
+
+  } catch(e) {
+    showError(`Failed to load vault: ${e.message}`);
+  }
+}
+
+async function discoverMdFiles(path) {
+  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`;
+  const headers = { 'Accept': 'application/vnd.github.v3+json' };
+  if (GITHUB_TOKEN) headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+  const items = await res.json();
+
+  let mdFiles = [];
+
+  for (const item of items) {
+    if (item.type === 'file' && item.name.endsWith('.md')) {
+      mdFiles.push({ name: item.name, path: item.path });
+    } else if (item.type === 'dir' && !item.name.startsWith('.')) {
+      // Recurse one level into subdirectories
+      try {
+        const subFiles = await discoverMdFiles(item.path);
+        mdFiles = mdFiles.concat(subFiles);
+      } catch(e) { /* skip failed dirs */ }
+    }
+  }
+
+  return mdFiles;
+}
+
+async function fetchFileContent(path) {
+  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`;
+  const headers = { 'Accept': 'application/vnd.github.v3+json' };
+  if (GITHUB_TOKEN) headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+
+  // Decode base64
+  const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  return decoded;
+}
+
+// ── FILE LIST UI ───────────────────────────────────────
+
+function renderFileList() {
+  const ul = document.getElementById('fileList');
+  ul.innerHTML = '';
+  vaultFiles.forEach((f, i) => {
+    const li = document.createElement('li');
+    li.className = 'file-item';
+    li.id = `file-${i}`;
+    li.innerHTML = `<span class="file-dot"></span><span class="file-name">${f.name.replace('.md','')}</span>`;
+    li.title = f.path;
+    ul.appendChild(li);
+  });
+}
+
+function updateFileStatus(i, status) {
+  const el = document.getElementById(`file-${i}`);
+  if (el) {
+    el.className = `file-item ${status}`;
+  }
+}
+
+function setStatus(text, type) {
+  const pill = document.getElementById('statusPill');
+  pill.textContent = text;
+  pill.className = `status-pill ${type}`;
+}
+
+function showError(msg) {
+  document.getElementById('loadingOverlay').style.display = 'none';
+  setStatus('error', 'error');
+  alert(msg);
+}
+
+// ── CHAT ──────────────────────────────────────────────
+
+function buildVaultContext() {
+  const loaded = vaultFiles.filter(f => f.loaded && f.content);
+
+  let ctx = `You are a strategic intelligence agent with full access to the user's OKA (Operational Knowledge Architecture) vault — a collection of positioning pieces, job analyses, strategic notes, and market observations.\n\n`;
+  ctx += `The vault contains ${loaded.length} files:\n`;
+  ctx += loaded.map(f => `- ${f.name}`).join('\n');
+  ctx += `\n\n---\n\nFULL VAULT CONTENTS:\n\n`;
+
+  loaded.forEach(f => {
+    ctx += `=== ${f.name} ===\n${f.content}\n\n`;
+  });
+
+  ctx += `---\n\nAnswer questions by synthesizing across files. Be specific — reference file names and exact language when relevant. Identify patterns, gaps, tensions, and opportunities the user may not have noticed. Write in clear, direct prose. No unnecessary preamble.`;
+
+  return ctx;
+}
+
+async function sendQuery() {
+  const input = document.getElementById('queryInput');
+  const query = input.value.trim();
+  if (!query || isQuerying) return;
+
+  isQuerying = true;
+  document.getElementById('sendBtn').disabled = true;
+  document.getElementById('emptyState')?.remove();
+
+  input.value = '';
+  autoResize(input);
+
+  // Add user message
+  conversationHistory.push({ role: 'user', content: query });
+  appendMessage('user', query);
+
+  // Thinking indicator
+  const thinkingId = 'thinking-' + Date.now();
+  const thinkingEl = document.createElement('div');
+  thinkingEl.className = 'thinking';
+  thinkingEl.id = thinkingId;
+  thinkingEl.innerHTML = `<div class="thinking-dots"><span></span><span></span><span></span></div><span>Scanning vault...</span>`;
+  document.getElementById('chatArea').appendChild(thinkingEl);
+  scrollToBottom();
+
+  try {
+    const systemPrompt = buildVaultContext();
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 2000,
+        system: systemPrompt,
+        messages: conversationHistory
+      })
+    });
+
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+
+    const reply = data.content?.[0]?.text || '';
+    conversationHistory.push({ role: 'assistant', content: reply });
+
+    document.getElementById(thinkingId)?.remove();
+
+    appendMessage('assistant', reply);
+
+  } catch(e) {
+    document.getElementById(thinkingId)?.remove();
+    appendMessage('assistant', `Error: ${e.message}`);
+  }
+
+  isQuerying = false;
+  document.getElementById('sendBtn').disabled = false;
+  scrollToBottom();
+}
+
+function appendMessage(role, text) {
+  const area = document.getElementById('chatArea');
+
+  if (area.children.length > 0) {
+    const divider = document.createElement('hr');
+    divider.className = 'message-divider';
+    area.appendChild(divider);
+  }
+
+  const msg = document.createElement('div');
+  msg.className = `message ${role}`;
+  msg.innerHTML = `
+    <div class="message-role">${role === 'user' ? 'You' : 'Vault Agent'}</div>
+    <div class="message-body">${role === 'assistant' ? formatMarkdown(text) : escapeHtml(text)}</div>
+  `;
+  area.appendChild(msg);
+  scrollToBottom();
+}
+
+function formatMarkdown(text) {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/^### (.+)$/gm, '<strong>$1</strong>')
+    .replace(/^## (.+)$/gm, '<strong>$1</strong>')
+    .replace(/^# (.+)$/gm, '<strong>$1</strong>')
+    .replace(/^- (.+)$/gm, '• $1')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br/>')
+    .replace(/^/, '<p>').replace(/$/, '</p>');
+}
+
+function escapeHtml(text) {
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function scrollToBottom() {
+  const area = document.getElementById('chatArea');
+  area.scrollTop = area.scrollHeight;
+}
+
+function sendSuggestion(card) {
+  const text = card.querySelector('.suggestion-card-text').textContent;
+  document.getElementById('queryInput').value = text;
+  sendQuery();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendQuery();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+}
+</script>
+</body>
+</html>
