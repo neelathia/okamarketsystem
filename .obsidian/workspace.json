@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "insights/🧠 INSIGHT 13 — Documentation Is Being Priced as Product Leadership.md",
+                "file": "insights/aiadoptioniskowledgedebtproblem.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "🧠 INSIGHT 13 — Documentation Is Being Priced as Product Leadership"
+              "title": "aiadoptioniskowledgedebtproblem"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 498.5
+    "width": 419.5
   },
   "right": {
     "id": "ced09e5cb30f71b3",
@@ -203,10 +203,20 @@
   },
   "active": "1ad9cf000d92ac89",
   "lastOpenFiles": [
+    "insights/aiadoptionhasknowledgedebtproblem.md",
     "insights/agenciesturningcontenttoproduct.md",
+    "insights/contentqualityisnowaiperformancevariable.md",
+    "insights/aiforcingsplitinknowledgedesign.md",
+    "insights/aiadoptioniskowledgedebtproblem.md",
+    "proof/theinstructionlayer.md",
+    "insights/knowledgeasAIinfrastructurethefoundationproblemisstructural.md",
+    "insights/thehiddenarchitecturelayer.md",
+    "insights/themultiplierisstrategynottool.md",
+    "insights/titleiswriterjobisarchitect.md",
+    "insights/documentationiscomplianceinfrastructure.md",
+    "insights/documentationpricedaspdtleadership.md",
     "insights/ekforaibuthiredforascontent.md",
     "insights/ttxexperience.md",
-    "insights/aiforcingsplitinknowledgedesign.md",
     "insights/docisbecomingexecution.md",
     "insights/marketgap.md",
     "structuredjobpatterns/seniordocumentationmanager.md",
@@ -219,18 +229,8 @@
     "structuredjobpatterns/contentengineer.md",
     "structuredjobpatterns/contentengineeraicontentsystems.md",
     "structuredjobpatterns/developerrelationsanddocumentationsystem.md",
-    "structuredjobpatterns/principalsoftwareengineerknowledgeplatformarchitecture.md",
-    "structuredjobpatterns/seniorknowledgemanagerstrategygovernance.md",
-    "structuredjobpatterns/aiautomationknowledgeimplementationmanager.md",
-    "structuredjobpatterns/seniorprocessarchitectaiworkflows.md",
-    "structuredjobpatterns/knowledgemanagergovernancecontentlayer.md",
-    "structuredjobpatterns/knowledgemanageritservices.md",
-    "structuredjobpatterns/Technicalwritertechjournalism.md",
-    "structuredjobpatterns/technicalwriter4execution.md",
-    "structuredjobpatterns/seniordirectorcontentstrategydesignoperationsarchitecture.md",
-    "structuredjobpatterns/knowledgemanageraidigital.md",
     "okamarketsystem",
-    "📁 04_Proof",
+    "proof",
     "structuredjobpatterns",
     "insights",
     "raw"

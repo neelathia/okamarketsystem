@@ -1,5 +1,4 @@
 
-
 > Companies are deploying AI tools faster than they are building the knowledge structures that make those tools work.
 
 **AI Adoption Has a Knowledge Debt Problem**

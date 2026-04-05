@@ -1,5 +1,4 @@
 
-
 > Companies are not hiring editors to improve documentation. They are hiring editors to stop their AI from hallucinating.
 
 **Content Quality Is Now an AI Performance Variable**
